@@ -188,10 +188,8 @@ export function Safety() {
   );
 }
 export function Settings() {
-  const { setToast } = usePrototype();
-  const [notifications, setNotifications] = useState(true);
-  const [reminders, setReminders] = useState(true);
-  const [name, setName] = useState("Mariana · exemplo");
+  const { setToast, displayName, setDisplayName, preferences, setPreferences } = usePrototype();
+  const [name, setName] = useState(displayName);
   return (
     <>
       <Heading
@@ -205,6 +203,8 @@ export function Settings() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              if (!name.trim()) return;
+              setDisplayName(name.trim());
               setToast("Preferências demonstrativas atualizadas apenas nesta sessão.");
             }}
           >
@@ -216,6 +216,7 @@ export function Settings() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 maxLength={80}
+                pattern={".*\\S.*"}
               />
             </label>
             <label>
@@ -238,14 +239,14 @@ export function Settings() {
             {
               title: "Atualizações de cuidados",
               text: "Informação sobre pedidos e preparação.",
-              value: notifications,
-              set: setNotifications,
+              value: preferences.notifications,
+              set: (value: boolean) => setPreferences({ ...preferences, notifications: value }),
             },
             {
               title: "Lembretes de preparação",
               text: "Uma rotina mais organizada.",
-              value: reminders,
-              set: setReminders,
+              value: preferences.reminders,
+              set: (value: boolean) => setPreferences({ ...preferences, reminders: value }),
             },
           ].map((o) => (
             <div className="preference" key={o.title}>
@@ -283,6 +284,17 @@ export function Settings() {
           Conhecer os princípios de segurança
           <ArrowRight size={15} />
         </ActionLink>
+      </Card>
+      <Card>
+        <h2>Fotografias e identidade visual</h2>
+        <p className="reading-text">
+          As fotografias são de banco de imagens Pexels, não geradas por IA. Não representam os
+          profissionais ou famílias apresentados, nem certificam competências. A identidade visual
+          foi reconstruída a partir da referência fornecida.
+        </p>
+        <a href="/images/sources.json" className="text-link" target="_blank" rel="noreferrer">
+          Consultar fontes das fotografias <ArrowRight size={15} />
+        </a>
       </Card>
       <Card>
         <h2>Fundação visual</h2>

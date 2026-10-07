@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { motion } from "motion/react";
+import { SelectionHighlight, useArrival } from "../components/effects";
 import { Link, useLocation } from "wouter";
 import {
   ArrowRight,
@@ -14,6 +16,16 @@ export default function Access({ kind }: { kind: "onboarding" | "login" | "recov
   const [, navigate] = useLocation();
   const { setRole } = usePrototype();
   const [step, setStep] = useState(0);
+  const arrival = useArrival();
+  const previousStep = useRef(0);
+  useEffect(() => {
+    if (previousStep.current === step) return;
+    previousStep.current = step;
+    const frame = requestAnimationFrame(() =>
+      document.querySelector<HTMLElement>(".access-form h1")?.focus(),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, [step]);
   const [sent, setSent] = useState(false);
   const [choice, setChoice] = useState<"parent" | "babysitter">("parent");
   const steps = [
@@ -48,9 +60,14 @@ export default function Access({ kind }: { kind: "onboarding" | "login" | "recov
       <main className="access-main">
         <aside className="access-art">
           <span className="eyebrow">NANNYBOSS · CHILD FIRST. ALWAYS.</span>
-          <div className="access-symbol">
-            <Logo compact />
-          </div>
+          <figure className="access-photo">
+            <img
+              src="/images/care-reading.webp"
+              alt="Família a partilhar um momento de leitura"
+              width="1200"
+              height="800"
+            />
+          </figure>
           <h2>
             Mais confiança.
             <br />
@@ -63,7 +80,7 @@ export default function Access({ kind }: { kind: "onboarding" | "login" | "recov
           </p>
           <span className="badge">Fase 1 · Experiência demonstrativa</span>
         </aside>
-        <section className="access-form">
+        <motion.section className="access-form" key={`${kind}-${step}`} {...arrival}>
           {kind === "onboarding" ? (
             <>
               <fieldset className="onboarding-progress" aria-label={`Etapa ${step + 1} de 3`}>
@@ -75,7 +92,7 @@ export default function Access({ kind }: { kind: "onboarding" | "login" | "recov
                 <current.icon size={26} />
               </div>
               <p className="eyebrow">PASSO {step + 1} DE 3</p>
-              <h1>{current.title}</h1>
+              <h1 tabIndex={-1}>{current.title}</h1>
               <p className="muted">{current.text}</p>
               <div className="actions">
                 <Button
@@ -120,6 +137,7 @@ export default function Access({ kind }: { kind: "onboarding" | "login" | "recov
                     onClick={() => setChoice(r.id)}
                     aria-pressed={choice === r.id}
                   >
+                    {choice === r.id && <SelectionHighlight group="access-role" />}
                     <r.icon size={25} />
                     <span>
                       <strong>{r.name}</strong>
@@ -238,7 +256,7 @@ export default function Access({ kind }: { kind: "onboarding" | "login" | "recov
             </>
           )}
           <DemoNotice />
-        </section>
+        </motion.section>
       </main>
     </div>
   );

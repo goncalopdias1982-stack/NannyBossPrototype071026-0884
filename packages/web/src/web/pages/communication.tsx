@@ -1,10 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import { useMotionPreference as useReducedMotion } from "../components/use-motion-preference";
+import { useArrival } from "../components/effects";
+import { useProgressiveExample } from "../components/use-progressive-example";
 import { Send, Sparkles, ShieldCheck, MessageCircle, LockKeyhole, ArrowRight } from "lucide-react";
 import { usePrototype } from "../components/prototype-context";
 import { Heading, Card, Badge, Avatar, TextLink } from "../components/primitives";
 export function Messages() {
-  const { messages, setMessages } = usePrototype();
+  const { messages, setMessages, role } = usePrototype();
   const [draft, setDraft] = useState("");
+  const arrival = useArrival();
+  const reduced = useReducedMotion();
+  const chatRef = useRef<HTMLDivElement>(null);
+  const lastCount = useRef(messages.length);
+  useEffect(() => {
+    if (messages.length > lastCount.current)
+      chatRef.current?.scrollTo({
+        top: chatRef.current.scrollHeight,
+        behavior: reduced ? "instant" : "smooth",
+      });
+    lastCount.current = messages.length;
+  }, [messages.length, reduced]);
+  const conversationName = role === "babysitter" ? "Família · exemplo" : "Inês Martins";
   return (
     <>
       <Heading
@@ -16,12 +33,12 @@ export function Messages() {
         <aside className="conversation-list">
           <h2>As suas conversas</h2>
           <button className="conversation active" aria-current="true">
-            <Avatar />
+            <Avatar initials={role === "babysitter" ? "RF" : "IM"} />
             <span>
-              <strong>Inês Martins</strong>
+              <strong>{conversationName}</strong>
               <small>Alinhar os detalhes do cuidado</small>
             </span>
-            <Badge>2</Badge>
+            <Badge>{messages.length}</Badge>
           </button>
           <div className="conversation-note">
             <MessageCircle size={23} />
@@ -34,10 +51,10 @@ export function Messages() {
         <section className="conversation-content">
           <header>
             <div className="person-row">
-              <Avatar />
+              <Avatar initials={role === "babysitter" ? "RF" : "IM"} />
               <div>
-                <strong>Inês Martins</strong>
-                <small>Perfil fictício · sem presença online real</small>
+                <strong>{conversationName}</strong>
+                <small>Conversa de preparação</small>
               </div>
             </div>
             <Badge tone="success">
@@ -46,6 +63,7 @@ export function Messages() {
             </Badge>
           </header>
           <div
+            ref={chatRef}
             className="chat-messages"
             role="log"
             aria-label="Conversa demonstrativa"
@@ -53,12 +71,16 @@ export function Messages() {
           >
             <p className="chat-date">CONVERSA ILUSTRATIVA</p>
             {messages.map((m, i) => (
-              <div key={i} className={`chat-bubble ${m.from === "parent" ? "own" : ""}`}>
+              <motion.div
+                {...arrival}
+                key={i}
+                className={`chat-bubble ${m.from === (role === "babysitter" ? "caregiver" : "parent") ? "own" : ""}`}
+              >
                 <p>{m.text}</p>
                 <small>
                   {m.time} · {m.from === "parent" ? "Família" : "Babysitter"}
                 </small>
-              </div>
+              </motion.div>
             ))}
           </div>
           <form
@@ -68,7 +90,11 @@ export function Messages() {
               if (!draft.trim()) return;
               setMessages([
                 ...messages,
-                { from: "parent", text: draft.trim(), time: "Agora · simulado" },
+                {
+                  from: role === "babysitter" ? "caregiver" : "parent",
+                  text: draft.trim(),
+                  time: "Agora · simulado",
+                },
               ]);
               setDraft("");
             }}
@@ -114,12 +140,15 @@ const answers = [
 ];
 export function Assistant() {
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState<string | null>(null);
+  const [hasResponse, setHasResponse] = useState(false);
+  const { text: response, busy, phase, present, finish } = useProgressiveExample();
+  const arrival = useArrival();
   const [last, setLast] = useState("");
   function ask(q: string) {
     setLast(q);
     const i = prompts.indexOf(q);
-    setResponse(
+    setHasResponse(true);
+    present(
       i >= 0
         ? answers[i]!
         : "Este é um conceito visual, sem IA real. As respostas disponíveis são exemplos pré-escritos. Para decisões sobre cuidado, segurança ou saúde, procure supervisão humana adequada.",
@@ -159,17 +188,50 @@ export function Assistant() {
               </button>
             ))}
           </div>
-          {response && (
-            <div className="assistant-response" aria-live="polite">
+          {hasResponse && (
+            <motion.div className="assistant-response" key={last} {...arrival}>
               <p className="assistant-question">{last}</p>
               <div className="notice lavender">
                 <Sparkles size={20} />
                 <div>
                   <strong>Resposta pré-escrita · mock</strong>
-                  <p>{response}</p>
+                  {busy && (
+                    <div className="example-processing">
+                      <span className="processing-dots" aria-hidden="true">
+                        <i />
+                        <i />
+                        <i />
+                      </span>
+                      <span>
+                        {phase === "preparing"
+                          ? "A abrir exemplo guardado…"
+                          : "A apresentar texto pré-escrito…"}{" "}
+                        · sem IA
+                      </span>
+                    </div>
+                  )}
+                  {busy && (
+                    <button type="button" className="button ghost small" onClick={finish}>
+                      Mostrar resposta completa
+                    </button>
+                  )}
+                  <p className="progressive-text" aria-hidden={busy || undefined}>
+                    {response || "O exemplo vai aparecer aqui."}
+                  </p>
+                  <output className="sr-only" aria-live="polite">
+                    {busy
+                      ? "A apresentar um exemplo pré-escrito. Não é uma resposta de inteligência artificial."
+                      : response}
+                  </output>
+                  {!busy && (
+                    <div className="assistant-next-actions">
+                      <TextLink to="/app/reserva">Preparar um pedido</TextLink>
+                      <TextLink to="/app/crianca">Rever rotina ilustrativa</TextLink>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
           <form
             className="message-composer"

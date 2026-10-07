@@ -27,6 +27,8 @@ import {
 } from "../components/primitives";
 import { CaregiverCard } from "../components/caregiver-card";
 import { usePrototype } from "../components/prototype-context";
+import { motion } from "motion/react";
+import { SelectionHighlight, useArrival } from "../components/effects";
 export function CaregiverList() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState(false);
@@ -44,7 +46,7 @@ export function CaregiverList() {
       <Heading
         eyebrow="UMA BOA LIGAÇÃO COMEÇA AQUI."
         title="Pessoas que cuidam."
-        description="Explore perfis demonstrativos. A escolha de cuidado exige avaliação humana."
+        description="Encontre uma presença atenta à rotina e ao tempo da sua família."
       />
       <div className="search-toolbar">
         <label className="search-field">
@@ -63,13 +65,14 @@ export function CaregiverList() {
         </Button>
       </div>
       <div className="section-head">
-        <p className="muted">{people.length} perfis fictícios · Lisboa</p>
+        <p className="muted">{people.length} perfis · Lisboa</p>
         <div className="segmented" aria-label="Tipo de lista">
           <button
             aria-pressed={!onlySaved}
             className={!onlySaved ? "active" : ""}
             onClick={() => setOnlySaved(false)}
           >
+            {!onlySaved && <SelectionHighlight group="caregiver-list" />}
             Todos
           </button>
           <button
@@ -77,6 +80,7 @@ export function CaregiverList() {
             className={onlySaved ? "active" : ""}
             onClick={() => setOnlySaved(true)}
           >
+            {onlySaved && <SelectionHighlight group="caregiver-list" />}
             Guardados ({saved.length})
           </button>
         </div>
@@ -107,8 +111,7 @@ export function CaregiverList() {
         </Card>
       )}
       <p className="fine-print">
-        Preços, experiência e verificações são apenas exemplos. Não é possível contratar
-        profissionais reais.
+        Escolher cuidado pede uma conversa e avaliação humana. Explore a abordagem de cada pessoa.
       </p>
       {filter && (
         <Modal title="Encontrar uma boa ligação" onClose={() => setFilter(false)}>
@@ -146,7 +149,7 @@ export function CaregiverProfile({ id }: { id: string }) {
         <div className="profile-person">
           <Avatar large initials={person.initials} color={person.color} />
           <div>
-            <Badge tone="glass">PERFIL FICTÍCIO</Badge>
+            <Badge tone="glass">UMA PRESENÇA COM PROPÓSITO</Badge>
             <h1>{person.name}</h1>
             <p>
               <MapPin size={15} />
@@ -162,7 +165,7 @@ export function CaregiverProfile({ id }: { id: string }) {
           {role === "babysitter" ? (
             <Button
               onClick={() =>
-                setToast("Edição profissional não implementada. Este perfil é fictício.")
+                setToast("A edição profissional ainda não está disponível neste protótipo.")
               }
             >
               Editar perfil · conceito
@@ -241,13 +244,12 @@ export function CaregiverProfile({ id }: { id: string }) {
           </div>
         </Card>
       </div>
-      <p className="fine-print">
-        *Preço indicativo fictício. Não existe contratação ou pagamento nesta fase.
-      </p>
+      <p className="fine-print">*Valores de referência. Sem contratação ou pagamento nesta fase.</p>
     </>
   );
 }
 export function ChildProfile() {
+  const arrival = useArrival();
   const [editing, setEditing] = useState(false);
   const [tab, setTab] = useState("Necessidades de cuidados");
   const { setToast } = usePrototype();
@@ -314,12 +316,15 @@ export function ChildProfile() {
             className={tab === t ? "active" : ""}
             onClick={() => setTab(t)}
           >
+            {tab === t && <SelectionHighlight group="care-tabs" />}
             {t}
           </button>
         ))}
       </div>
       <Card>
-        <div
+        <motion.div
+          key={tab}
+          {...arrival}
           id="care-panel"
           role="tabpanel"
           aria-labelledby={`care-tab-${tab.replaceAll(" ", "-")}`}
@@ -400,7 +405,7 @@ export function ChildProfile() {
               <Badge>Requer validação humana e jurídica</Badge>
             </>
           )}
-        </div>
+        </motion.div>
       </Card>
       {editing && (
         <Modal title="Editar informação ilustrativa" onClose={() => setEditing(false)}>

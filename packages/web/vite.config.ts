@@ -34,6 +34,7 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks(id) {
             if (id.includes("node_modules")) {
+              if (/\/(?:motion|framer-motion|motion-dom|motion-utils)\//.test(id)) return "motion";
               if (
                 id.includes("@runablehq") ||
                 id.includes("html2canvas") ||

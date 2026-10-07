@@ -11,9 +11,13 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { Reveal } from "../components/effects";
+import { useParallax } from "../components/use-parallax";
 import { Logo, ActionLink, TextLink, Avatar, Badge, DemoNotice } from "../components/primitives";
 export default function Welcome() {
   const [menu, setMenu] = useState(false);
+  const heroRef = useParallax();
+  const previewRef = useParallax<HTMLElement>();
   return (
     <div className="welcome">
       <a className="skip-link" href="#welcome-main">
@@ -23,7 +27,11 @@ export default function Welcome() {
         <Link to="/" aria-label="NannyBoss início">
           <Logo />
         </Link>
-        <nav className={menu ? "public-nav open" : "public-nav"} aria-label="Navegação pública">
+        <nav
+          className={menu ? "public-nav open" : "public-nav"}
+          id="public-navigation"
+          aria-label="Navegação pública"
+        >
           <a href="#como-funciona" onClick={() => setMenu(false)}>
             Como funciona
           </a>
@@ -37,19 +45,41 @@ export default function Welcome() {
         <button
           className="icon-button public-menu"
           aria-label={menu ? "Fechar navegação" : "Abrir navegação"}
+          aria-expanded={menu}
+          aria-controls="public-navigation"
           onClick={() => setMenu(!menu)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setMenu(false);
+          }}
         >
           {menu ? <X /> : <Menu />}
         </button>
       </header>
       <main id="welcome-main">
         <section className="hero">
-          <div className="hero-art">
+          <div className="hero-art" ref={heroRef}>
             <div className="orbit orbit-one" />
             <div className="orbit orbit-two" />
             <div className="orbit orbit-three" />
             <div className="orbit orbit-four" />
             <div className="hero-halo" />
+            <figure className="hero-photo hero-photo-care">
+              <img
+                src="/images/care-reading.webp"
+                alt="Família a ler um livro com uma criança; fotografia de banco de imagens"
+                width="1200"
+                height="800"
+                fetchPriority="high"
+              />
+            </figure>
+            <figure className="hero-photo hero-photo-child">
+              <img
+                src="/images/child-editorial.webp"
+                alt="Criança a sorrir ao ar livre; fotografia editorial sem associação a um perfil"
+                width="600"
+                height="900"
+              />
+            </figure>
             <div className="glass-emblem">
               <Logo compact />
               <span>
@@ -108,15 +138,15 @@ export default function Welcome() {
           </div>
         </section>
         <section className="highlights" id="como-funciona">
-          <div className="section-title">
+          <Reveal className="section-title">
             <div>
               <p className="eyebrow">MENOS INCERTEZA. MAIS TRANQUILIDADE.</p>
               <h2>Cuidado, em todos os detalhes.</h2>
             </div>
             <TextLink to="/app/seguranca">Conhecer a nossa abordagem</TextLink>
-          </div>
+          </Reveal>
           <div className="highlight-grid">
-            <article className="highlight-card lavender">
+            <Reveal className="highlight-card lavender">
               <span className="icon-tile">
                 <ShieldCheck size={25} />
               </span>
@@ -132,11 +162,11 @@ export default function Welcome() {
                 </span>
                 <div className="mini-glass">
                   <Check size={14} />
-                  Verificações transparentes
+                  Verificações · conceito
                 </div>
               </div>
-            </article>
-            <article className="highlight-card mint">
+            </Reveal>
+            <Reveal className="highlight-card mint">
               <span className="icon-tile">
                 <HeartHandshake size={25} />
               </span>
@@ -157,9 +187,8 @@ export default function Welcome() {
                 </div>
                 <HeartHandshake size={21} />
               </div>
-              <span className="mini-caption">Perfil ilustrativo · dados fictícios</span>
-            </article>
-            <article className="highlight-card sky">
+            </Reveal>
+            <Reveal className="highlight-card sky">
               <span className="icon-tile">
                 <LockKeyhole size={25} />
               </span>
@@ -175,7 +204,7 @@ export default function Welcome() {
               <div className="privacy-stack">
                 <div>
                   <LockKeyhole size={17} />
-                  Informação protegida
+                  Privacidade · conceito
                 </div>
                 <div>
                   <CalendarDays size={17} />
@@ -186,11 +215,11 @@ export default function Welcome() {
                   Controlo da família
                 </div>
               </div>
-            </article>
+            </Reveal>
           </div>
         </section>
-        <section className="care-section">
-          <div className="care-copy">
+        <section className="care-section" ref={previewRef}>
+          <Reveal className="care-copy">
             <p className="eyebrow">O SEU ESPAÇO, EM EQUILÍBRIO.</p>
             <h2>
               Tudo mais claro.
@@ -206,7 +235,7 @@ export default function Welcome() {
               Explorar a demonstração <ArrowRight size={16} />
             </ActionLink>
             <small>Sem registo. Sem dados reais.</small>
-          </div>
+          </Reveal>
           <div className="dashboard-preview">
             <div className="preview-bar">
               <span />
@@ -225,7 +254,7 @@ export default function Welcome() {
                   <Avatar />
                   <div>
                     <strong>Inês Martins</strong>
-                    <small>Babysitter · perfil fictício</small>
+                    <small>Babysitter</small>
                   </div>
                   <span className="tiny-icon">
                     <ArrowRight size={16} />
@@ -244,18 +273,20 @@ export default function Welcome() {
           </div>
         </section>
         <section className="closing">
-          <span className="icon-tile lavender">
-            <Sparkles size={24} />
-          </span>
-          <h2>
-            A criança primeiro.
-            <br />
-            Sempre.
-          </h2>
-          <p>Tecnologia que aproxima. Cuidado que protege.</p>
-          <ActionLink to="/onboarding">
-            Começar a minha experiência <ArrowRight size={16} />
-          </ActionLink>
+          <Reveal>
+            <span className="icon-tile lavender">
+              <Sparkles size={24} />
+            </span>
+            <h2>
+              A criança primeiro.
+              <br />
+              Sempre.
+            </h2>
+            <p>Tecnologia que aproxima. Cuidado que protege.</p>
+            <ActionLink to="/onboarding">
+              Começar a minha experiência <ArrowRight size={16} />
+            </ActionLink>
+          </Reveal>
         </section>
       </main>
       <footer className="public-footer">

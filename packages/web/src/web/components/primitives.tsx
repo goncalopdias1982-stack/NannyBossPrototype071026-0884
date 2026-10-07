@@ -2,28 +2,18 @@ import { useEffect, useRef, type ReactNode, type ButtonHTMLAttributes } from "re
 import { Link } from "wouter";
 import { ShieldCheck, X, ArrowRight, Check, Info } from "lucide-react";
 import { usePrototype } from "./prototype-context";
+import { AnimatePresence, motion } from "motion/react";
+import { useMotionPreference as useReducedMotion } from "./use-motion-preference";
+import { useArrival } from "./effects";
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
-    <span className="brand">
-      <svg width="35" height="39" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path
-          d="M32 7 51 15v17c0 12-8 20-19 25C21 52 13 44 13 32V15L32 7Z"
-          stroke="currentColor"
-          strokeWidth="3.5"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M22 37V25c0-6 9-6 10 0v14m0-14c1-6 10-6 10 0v12"
-          stroke="currentColor"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-        />
-      </svg>
-      {!compact && (
-        <span>
-          NannyBoss<span className="brand-dot">.</span>
-        </span>
-      )}
+    <span className={`brand ${compact ? "brand-compact" : ""}`}>
+      <img
+        src={compact ? "/brand/symbol.svg" : "/brand/horizontal.svg"}
+        alt={compact ? "Símbolo NannyBoss" : "NannyBoss · Child First. Always."}
+        width={compact ? 40 : 180}
+        height={compact ? 42 : 45}
+      />
     </span>
   );
 }
@@ -56,7 +46,19 @@ export function ActionLink({
   );
 }
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`card ${className}`}>{children}</section>;
+  const reduced = useReducedMotion();
+  return (
+    <motion.section
+      className={`card ${className}`}
+      initial={reduced ? false : { opacity: 1, y: 10 }}
+      animate={reduced ? { opacity: 1, y: 0 } : undefined}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: reduced ? 0 : 0.32 }}
+    >
+      {children}
+    </motion.section>
+  );
 }
 export function Badge({ children, tone = "neutral" }: { children: ReactNode; tone?: string }) {
   return <span className={`badge ${tone}`}>{children}</span>;
@@ -70,7 +72,22 @@ export function Avatar({
   color?: string;
   large?: boolean;
 }) {
-  return <span className={`avatar ${color} ${large ? "large" : ""}`}>{initials}</span>;
+  const photo = ({ IM: "ines", SA: "sofia", MC: "miguel" } as Record<string, string>)[initials];
+  return (
+    <span className={`avatar ${color} ${large ? "large" : ""}`}>
+      {photo ? (
+        <img
+          src={`/images/portrait-${photo}.webp`}
+          alt="Retrato editorial de um adulto ao ar livre"
+          width={large ? 90 : 42}
+          height={large ? 90 : 42}
+          loading="lazy"
+        />
+      ) : (
+        initials
+      )}
+    </span>
+  );
 }
 export function Heading({
   eyebrow,
@@ -99,8 +116,8 @@ export function DemoNotice({ short = false }: { short?: boolean }) {
     <div className="demo-notice">
       <Info size={14} />
       {short
-        ? "Protótipo · dados fictícios"
-        : "Ambiente de demonstração. Dados fictícios; nenhuma verificação ou serviço é real."}
+        ? "Demonstração · sem serviços reais"
+        : "Demonstração de interface. Perfis, preços e verificações são exemplos; não são prestados serviços reais."}
     </div>
   );
 }
@@ -202,20 +219,35 @@ export function Modal({
 
 export function Toast() {
   const { toast, setToast } = usePrototype();
+  const arrival = useArrival();
+  const reduced = useReducedMotion();
   useEffect(() => {
     if (!toast) return;
     const timer = setTimeout(() => setToast(""), 5000);
     return () => clearTimeout(timer);
   }, [toast, setToast]);
-  return toast ? (
-    <output className="toast">
-      <Check size={18} />
-      {toast}
-      <button className="icon-button" aria-label="Fechar notificação" onClick={() => setToast("")}>
-        <X size={16} />
-      </button>
-    </output>
-  ) : null;
+  return (
+    <AnimatePresence>
+      {toast && (
+        <motion.output
+          key={toast}
+          className="toast"
+          {...arrival}
+          exit={reduced ? { opacity: 1 } : { opacity: 0, y: 6 }}
+        >
+          <Check size={18} />
+          {toast}
+          <button
+            className="icon-button"
+            aria-label="Fechar notificação"
+            onClick={() => setToast("")}
+          >
+            <X size={16} />
+          </button>
+        </motion.output>
+      )}
+    </AnimatePresence>
+  );
 }
 export function TextLink({ to, children }: { to: string; children: ReactNode }) {
   return (

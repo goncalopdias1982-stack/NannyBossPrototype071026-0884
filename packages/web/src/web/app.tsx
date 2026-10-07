@@ -13,6 +13,10 @@ import { BookingRequest, BookingConfirmation } from "./pages/booking";
 import { Messages, Assistant } from "./pages/communication";
 import { Safety, Settings } from "./pages/safety-settings";
 import DesignSystem from "./pages/design-system";
+import "./design/mobile-first.css";
+import "./design/effects.css";
+import "./design/immersive.css";
+import "./design/homepage.css";
 function Workspace() {
   return (
     <AppLayout>

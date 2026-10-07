@@ -9,7 +9,6 @@ import {
   Sparkles,
   Clock3,
   ChevronRight,
-  Plus,
 } from "lucide-react";
 import {
   Heading,
@@ -23,58 +22,43 @@ import {
 import { caregivers } from "../data/mock";
 import { CaregiverCard } from "../components/caregiver-card";
 import { usePrototype } from "../components/prototype-context";
+import { CareHub, CareAgenda } from "../components/care-hub";
 export default function Dashboard() {
-  const { confirmed } = usePrototype();
+  const { confirmed, booking } = usePrototype();
+  const person = caregivers.find((p) => p.id === booking.caregiver) ?? caregivers[0]!;
+  const date = booking.date
+    ? new Date(booking.date + "T12:00:00").toLocaleDateString("pt-PT", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+      })
+    : "Data por definir";
   return (
     <>
-      <Heading
-        eyebrow="QUARTA-FEIRA, 7 DE OUTUBRO · EXEMPLO"
-        title="Olá, Mariana."
-        description="Mais tranquilidade para o seu dia. Mais presença para a sua família."
-        action={
-          <ActionLink to="/app/reserva">
-            <Plus size={17} />
-            Novo pedido de cuidado
-          </ActionLink>
-        }
-      />
+      <CareHub />
       <div className="dashboard-feature">
-        <div className="feature-message">
-          <Badge tone="glass">
-            <ShieldCheck size={13} />
-            CHILD FIRST. ALWAYS.
-          </Badge>
-          <h2>
-            Quando o cuidado está preparado,
-            <br />a confiança acontece.
-          </h2>
-          <p>
-            Um bom cuidado começa com uma conversa.
-            <br />
-            Alinhe a rotina, as necessidades e o que é importante.
-          </p>
-          <TextLink to="/app/crianca">Rever informação de cuidados</TextLink>
-          <div className="feature-decoration">
-            <LogoShape />
-          </div>
-        </div>
         <Card className="next-care">
           <div className="section-head">
             <span className="eyebrow">PRÓXIMO CUIDADO</span>
             <Badge tone="success">{confirmed ? "Pedido simulado" : "Exemplo"}</Badge>
           </div>
-          <h3>Sábado, 10 de outubro</h3>
+          <h3 className="date-label">{date}</h3>
+          <p className="care-service-label">{booking.service}</p>
           <p className="muted">
             <Clock3 size={15} />
-            17:00 — 20:00 <span>· Lisboa</span>
+            {booking.start} — {booking.end} <span>· Lisboa</span>
           </p>
           <div className="person-row">
-            <Avatar />
+            <Avatar initials={person.initials} color={person.color} />
             <div>
-              <strong>Inês Martins</strong>
-              <small>Babysitter · perfil fictício</small>
+              <strong>{person.name}</strong>
+              <small>Babysitter</small>
             </div>
-            <Link to="/app/babysitter/ines" className="icon-button" aria-label="Ver perfil de Inês">
+            <Link
+              to={`/app/babysitter/${person.id}`}
+              className="icon-button"
+              aria-label={`Ver perfil de ${person.name}`}
+            >
               <ChevronRight size={20} />
             </Link>
           </div>
@@ -87,12 +71,13 @@ export default function Dashboard() {
             <ArrowRight size={15} />
           </ActionLink>
         </Card>
+        <CareAgenda />
       </div>
       <div className="quick-grid">
         {[
           {
             title: "A sua família",
-            desc: "1 perfil de cuidados fictício",
+            desc: "Rotina e informação de cuidados",
             icon: UsersRound,
             path: "/app/crianca",
             color: "lavender",
@@ -137,7 +122,7 @@ export default function Dashboard() {
         ))}
       </div>
       <p className="fine-print">
-        *Valores ilustrativos. Perfis, experiência e estados de verificação são fictícios.
+        *Valores de referência para explorar a experiência. Sem contratação ou pagamento.
       </p>
       <Card className="assistant-banner">
         <div className="icon-tile lavender">
@@ -157,11 +142,8 @@ export default function Dashboard() {
     </>
   );
 }
-function LogoShape() {
-  return <ShieldCheck size={128} strokeWidth={0.6} />;
-}
 export function BabysitterDashboard() {
-  const { setToast } = usePrototype();
+  const { setToast, booking, displayName } = usePrototype();
   return (
     <>
       <Heading
@@ -193,11 +175,13 @@ export function BabysitterDashboard() {
         <Card>
           <p className="eyebrow">DISPONIBILIDADE · DEMONSTRAÇÃO</p>
           <h3>O seu próximo cuidado</h3>
-          <p>Sábado, 10 de outubro · 17:00 — 20:00</p>
+          <p>
+            {booking.date || "Data por definir"} · {booking.start} — {booking.end}
+          </p>
           <div className="person-row">
             <Avatar initials="MF" color="blush" />
             <div>
-              <strong>Família de Mariana</strong>
+              <strong>Família de {displayName}</strong>
               <small>Lisboa · dados fictícios</small>
             </div>
           </div>

@@ -19,9 +19,9 @@ export default function DesignSystem() {
   return (
     <>
       <Heading
-        eyebrow="NANNYBOSS · FUNDAÇÃO VISUAL 01"
-        title="Calma por natureza."
-        description="Uma linguagem consistente de cuidado, confiança e proteção."
+        eyebrow="NANNYBOSS · UNIVERSO VISUAL 02"
+        title="Presença, em cada dimensão."
+        description="Uma linguagem imersiva de cuidado: profundidade, clareza e ligação humana."
         action={
           <ActionLink to="/app" variant="secondary">
             Voltar ao protótipo
@@ -29,7 +29,7 @@ export default function DesignSystem() {
         }
       />
       <Card>
-        <p className="eyebrow">IDENTIDADE ORIGINAL</p>
+        <p className="eyebrow">IDENTIDADE · REFERÊNCIA RECONSTRUÍDA</p>
         <div className="identity-samples">
           <Logo />
           <div className="identity-dark">
@@ -45,19 +45,24 @@ export default function DesignSystem() {
             alt="Ícone da aplicação NannyBoss"
           />
         </div>
-        <p className="muted">Proteção e ligação. Símbolo abstrato, monocromático e adaptável.</p>
+        <p className="muted">
+          Símbolo azul/lilás reconstruído em SVG transparente a partir da referência fornecida.
+          Aproximação vetorial, não o ficheiro original. Fotografias de banco de imagens apenas
+          ilustrativas.
+        </p>
       </Card>
       <Card>
         <h2>Paleta com propósito</h2>
         <div className="swatches">
           {[
-            ["Lavender", "#e8e3f6"],
-            ["Sky", "#e4effb"],
-            ["Mint", "#e0f0e8"],
-            ["Blush", "#f7e7e9"],
-            ["Off-white", "#f8f9fc"],
-            ["Ink", "#202633"],
-            ["Action", "#2364c5"],
+            ["Lilac field", "#e3d7ee"],
+            ["Lavender", "#eee7f5"],
+            ["Sky", "#eaf2fc"],
+            ["Mint", "#eaf5ee"],
+            ["Blush", "#fbecef"],
+            ["Off-white", "#f7f7fa"],
+            ["Ink", "#292535"],
+            ["Action", "#705086"],
           ].map(([n, c]) => (
             <div key={n}>
               <span style={{ background: c }} />
@@ -157,6 +162,58 @@ export default function DesignSystem() {
           ms para entrada; respeita prefers-reduced-motion.
         </p>
         <Badge>Alvos de toque ≥ 44px</Badge>
+      </Card>
+      <Card>
+        <p className="eyebrow">O NOVO CENTRO DE CUIDADOS</p>
+        <h2>Uma experiência ligada, não apenas decorada.</h2>
+        <p className="reading-text">
+          O tipo de cuidado e o dia escolhido na agenda acompanham o pedido, o resumo e a
+          confirmação. A cena reage ao ponteiro e ao scroll, sem animações permanentes. Os perfis
+          compactos aproximam a experiência mobile e desktop.
+        </p>
+        <ActionLink to="/app" variant="secondary">
+          Explorar o centro de cuidados
+        </ActionLink>
+      </Card>
+      <Card className="effects-catalogue">
+        <p className="eyebrow">MOVIMENTO COM PROPÓSITO</p>
+        <h2>O feedback acompanha o cuidado.</h2>
+        <div className="effects-catalogue-grid">
+          <div>
+            <strong>Descobrir</strong>
+            <p>
+              Entradas suaves, camadas parallax, reflexos e reveals por scroll, sem fundos em
+              movimento contínuo.
+            </p>
+            <ActionLink to="/" variant="secondary">
+              Ver página inicial
+            </ActionLink>
+          </div>
+          <div>
+            <strong>Preparar</strong>
+            <p>
+              Pedido em três etapas, campos com feedback, resumo atualizado e confirmação com
+              progresso demonstrativo.
+            </p>
+            <ActionLink to="/app/reserva" variant="secondary">
+              Explorar pedido
+            </ActionLink>
+          </div>
+          <div>
+            <strong>Conversar</strong>
+            <p>
+              Mensagens com entrada discreta. Assistente apresenta texto pré-escrito, com opção de
+              mostrar tudo imediatamente.
+            </p>
+            <ActionLink to="/app/assistente" variant="secondary">
+              Explorar assistente
+            </ActionLink>
+          </div>
+        </div>
+        <p className="muted">
+          A preferência do dispositivo por movimento reduzido remove deslocações e apresentação
+          progressiva. Sem som automático, 3D ornamental ou serviços reais.
+        </p>
       </Card>
       {modal && (
         <Modal title="Uma superfície, um propósito." onClose={() => setModal(false)}>

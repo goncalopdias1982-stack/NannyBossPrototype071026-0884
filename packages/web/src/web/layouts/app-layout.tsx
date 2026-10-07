@@ -1,14 +1,88 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { Bell, ChevronDown, Menu, ShieldCheck, LogOut, X } from "lucide-react";
 import { navigation, sitterNavigation, roleHomes } from "../navigation/routes";
 import { Logo, Avatar, DemoNotice, Modal } from "../components/primitives";
 import { usePrototype } from "../components/prototype-context";
+import { motion } from "motion/react";
+import { SelectionHighlight, useArrival } from "../components/effects";
 export default function AppLayout({ children }: { children: ReactNode }) {
   const [path, navigate] = useLocation();
-  const { role, setRole } = usePrototype();
+  const arrival = useArrival();
+  const { role, setRole, messages } = usePrototype();
   const [menu, setMenu] = useState(false);
+  const menuRef = useRef<HTMLElement>(null);
+  const menuTrigger = useRef<HTMLElement | null>(null);
+  function openMenu() {
+    menuTrigger.current = document.activeElement as HTMLElement;
+    setMenu(true);
+  }
   const [notifications, setNotifications] = useState(false);
+  useEffect(() => {
+    if (!menu) return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    function resize() {
+      if (desktop.matches) setMenu(false);
+    }
+    desktop.addEventListener("change", resize);
+    const previous = menuTrigger.current ?? (document.activeElement as HTMLElement);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    function focusMenu() {
+      menuRef.current?.querySelector<HTMLElement>('button[aria-label="Fechar menu"]')?.focus();
+    }
+    const sidebar = menuRef.current;
+    function arrived(event: TransitionEvent) {
+      if (event.target === sidebar && !sidebar?.contains(document.activeElement)) focusMenu();
+    }
+    sidebar?.addEventListener("transitionend", arrived);
+    let secondFrame = 0;
+    const focusFrame = requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(focusMenu);
+    });
+    function keys(event: KeyboardEvent) {
+      if (event.key === "Escape") setMenu(false);
+      if (event.key !== "Tab") return;
+      const controls = menuRef.current?.querySelectorAll<HTMLElement>("a,button,select");
+      if (!controls?.length) return;
+      const first = controls[0],
+        last = controls[controls.length - 1];
+      if (!menuRef.current?.contains(document.activeElement)) {
+        event.preventDefault();
+        first?.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+    window.addEventListener("keydown", keys);
+    return () => {
+      document.body.style.overflow = overflow;
+      cancelAnimationFrame(focusFrame);
+      cancelAnimationFrame(secondFrame);
+      sidebar?.removeEventListener("transitionend", arrived);
+      desktop.removeEventListener("change", resize);
+      window.removeEventListener("keydown", keys);
+      queueMicrotask(() => previous?.focus());
+    };
+  }, [menu]);
+  const active = (target: string) =>
+    path === target ||
+    (role === "parent" && target === "/app/babysitters" && path.startsWith("/app/babysitter/"));
+  const mobileLabels: Record<string, string> = {
+    "/app": "Início",
+    "/babysitter": "Início",
+    "/admin": "Início",
+    "/app/babysitters": "Pessoas",
+    "/app/reserva": "Pedidos",
+    "/app/mensagens": "Conversas",
+    "/app/babysitter/ines": "Perfil",
+    "/app/seguranca": "Segurança",
+    "/app/definicoes": "Definições",
+  };
   const nav =
     role === "babysitter"
       ? sitterNavigation
@@ -23,7 +97,14 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       <a href="#main-content" className="skip-link">
         Saltar para o conteúdo
       </a>
-      <aside className={`sidebar ${menu ? "open" : ""}`}>
+      <aside
+        id="workspace-navigation"
+        ref={menuRef}
+        className={`sidebar ${menu ? "open" : ""}`}
+        role={menu ? "dialog" : undefined}
+        aria-modal={menu ? true : undefined}
+        aria-label={menu ? "Menu de navegação" : undefined}
+      >
         <div className="sidebar-logo">
           <Link to="/" aria-label="NannyBoss — início">
             <Logo />
@@ -61,12 +142,20 @@ export default function AppLayout({ children }: { children: ReactNode }) {
             <Link
               key={n.path}
               to={n.path}
-              className={`nav-item ${path === n.path ? "selected" : ""}`}
+              className={`nav-item ${active(n.path) ? "selected" : ""}`}
+              aria-current={active(n.path) ? "page" : undefined}
               onClick={() => setMenu(false)}
             >
               <n.icon size={19} />
               <span>{n.label}</span>
-              {n.path === "/app/mensagens" && <span className="nav-count">2</span>}
+              {n.path === "/app/mensagens" && (
+                <span
+                  className="nav-count"
+                  aria-label={`${messages.length} mensagens demonstrativas`}
+                >
+                  {messages.length}
+                </span>
+              )}
             </Link>
           ))}
         </nav>
@@ -90,16 +179,28 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       {menu && (
         <button className="menu-shade" aria-label="Fechar menu" onClick={() => setMenu(false)} />
       )}
-      <div className="app-body">
+      <div className="app-body" inert={menu}>
         <header className="app-topbar">
           <div className="topbar-left">
             <button
               className="icon-button mobile-only"
               aria-label="Abrir menu"
-              onClick={() => setMenu(true)}
+              aria-expanded={menu}
+              aria-controls="workspace-navigation"
+              onClick={openMenu}
             >
               <Menu size={22} />
             </button>
+            <Link to="/" className="mobile-brand mobile-only" aria-label="NannyBoss início">
+              <Logo compact />
+            </Link>
+            <span className="mobile-workspace">
+              {role === "parent"
+                ? "Família"
+                : role === "babysitter"
+                  ? "Babysitter"
+                  : "Administração"}
+            </span>
             <span className="breadcrumb">
               O meu espaço <span>/</span>{" "}
               {role === "parent"
@@ -119,7 +220,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
               <Bell size={19} />
               <i />
             </button>
-            <Link to="/app/definicoes" aria-label="Perfil e definições">
+            <Link to="/app/definicoes" className="icon-button" aria-label="Perfil e definições">
               <Avatar
                 initials={role === "parent" ? "MF" : role === "babysitter" ? "IM" : "AD"}
                 color="blush"
@@ -127,19 +228,25 @@ export default function AppLayout({ children }: { children: ReactNode }) {
             </Link>
           </div>
         </header>
-        <main id="main-content" className="app-main">
+        <motion.main id="main-content" className="app-main motion-page" key={path} {...arrival}>
           {children}
           <DemoNotice />
-        </main>
+        </motion.main>
       </div>
-      <nav className="mobile-nav" aria-label="Atalhos mobile">
+      <nav className="mobile-nav" aria-label="Atalhos mobile" inert={menu}>
         {nav.slice(0, 4).map((n) => (
-          <Link to={n.path} key={n.path} className={path === n.path ? "active" : ""}>
+          <Link
+            to={n.path}
+            key={n.path}
+            className={active(n.path) ? "active" : ""}
+            aria-current={active(n.path) ? "page" : undefined}
+          >
+            {active(n.path) && <SelectionHighlight group="mobile-navigation" />}
             <n.icon size={21} />
-            <span>{n.label.split(" ")[0]}</span>
+            <span>{mobileLabels[n.path] || n.label.split(" ")[0]}</span>
           </Link>
         ))}
-        <button onClick={() => setMenu(true)}>
+        <button aria-expanded={menu} aria-controls="workspace-navigation" onClick={openMenu}>
           <Menu size={21} />
           <span>Mais</span>
         </button>

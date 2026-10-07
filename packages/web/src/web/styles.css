@@ -127,7 +127,7 @@ select:focus {
   color: var(--muted);
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   font-weight: 650;
   color: var(--muted);
@@ -188,7 +188,7 @@ select:focus {
   background: #e9edf3;
 }
 .button.small {
-  min-height: 38px;
+  min-height: 44px;
   padding: 8px 17px;
   font-size: 12px;
 }
@@ -244,7 +244,7 @@ select:focus {
   background: #edf0f5;
   color: #535d70;
   padding: 5px 10px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: 0.01em;
@@ -398,7 +398,7 @@ select:focus {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  font-size: 10px;
+  font-size: 11px;
   color: #626e80;
   margin-top: 36px;
 }
@@ -598,7 +598,7 @@ select:focus {
   stroke: #51647b;
 }
 .glass-emblem > span {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.6;
   text-align: center;
   letter-spacing: 0.18em;
@@ -630,7 +630,7 @@ select:focus {
 .art-caption {
   position: absolute;
   bottom: 23px;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.22em;
   color: #85909e;
 }
@@ -648,7 +648,7 @@ select:focus {
   font-weight: 670;
 }
 .hero .eyebrow {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   margin-bottom: 15px;
 }
@@ -681,14 +681,14 @@ select:focus {
   display: block;
 }
 .cta-capsule small {
-  font-size: 9px;
+  font-size: 11px;
   display: block;
   color: var(--muted);
 }
 .cta-capsule .button {
   font-size: 11px;
   padding: 12px 18px;
-  min-height: 42px;
+  min-height: 44px;
 }
 .hero-actions > .text-link {
   font-size: 11px;
@@ -701,7 +701,7 @@ select:focus {
   gap: 60px;
   padding: 18px 0 24px;
   color: #707a88;
-  font-size: 10px;
+  font-size: 11px;
 }
 .hero-footnote span {
   display: flex;
@@ -713,7 +713,7 @@ select:focus {
   padding: 65px max(48px, calc((100vw - 1184px) / 2)) 70px;
 }
 .highlights .eyebrow {
-  font-size: 9px;
+  font-size: 11px;
 }
 .highlight-grid {
   display: grid;
@@ -767,7 +767,7 @@ select:focus {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 9px;
+  font-size: 11px;
   padding: 10px 14px;
   border-radius: 999px;
   background: #fffc;
@@ -789,7 +789,7 @@ select:focus {
   display: block;
 }
 .mini-profile small {
-  font-size: 8px;
+  font-size: 11px;
   color: var(--muted);
   display: block;
 }
@@ -800,7 +800,7 @@ select:focus {
 .mini-caption {
   display: block;
   text-align: center;
-  font-size: 8px;
+  font-size: 11px;
   color: #626e74;
   margin-top: 17px;
 }
@@ -816,7 +816,7 @@ select:focus {
   padding: 11px 14px;
   background: #ffffffb0;
   border-radius: 12px;
-  font-size: 10px;
+  font-size: 11px;
 }
 .privacy-stack > div:nth-child(2) {
   margin-left: 16px;
@@ -846,7 +846,7 @@ select:focus {
   display: block;
   margin: 12px 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
 }
 .dashboard-preview {
   border: 1px solid #fff;
@@ -871,7 +871,7 @@ select:focus {
   border-radius: 100%;
 }
 .preview-bar > small {
-  font-size: 9px;
+  font-size: 11px;
   color: #708090;
   margin: auto;
 }
@@ -883,7 +883,7 @@ select:focus {
   margin-bottom: 20px;
 }
 .preview-content .eyebrow {
-  font-size: 8px;
+  font-size: 11px;
 }
 .preview-session {
   padding: 23px;
@@ -910,7 +910,7 @@ select:focus {
   margin-top: 20px;
 }
 .preview-bottom p {
-  font-size: 10px;
+  font-size: 11px;
   margin: 0;
 }
 .closing {
@@ -980,7 +980,7 @@ select:focus {
 }
 .workspace-picker > label {
   display: block;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   color: #7b8392;
   margin-bottom: 7px;
@@ -1036,7 +1036,7 @@ select:focus {
 }
 .nav-count {
   border-radius: 50%;
-  font-size: 9px;
+  font-size: 11px;
   padding: 0 6px;
   background: #fff;
   margin-left: auto;
@@ -1059,13 +1059,13 @@ select:focus {
   margin-top: 8px;
 }
 .child-first p {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.6;
   margin-top: 5px;
 }
 .sidebar-bottom > small {
   display: block;
-  font-size: 9px;
+  font-size: 11px;
   color: #7c8595;
   padding: 12px;
 }
@@ -1097,7 +1097,7 @@ select:focus {
   color: #b0b8c6;
 }
 .environment-pill {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.035em;
   border: 1px solid #dce2ed;
   padding: 5px 11px;
@@ -1138,7 +1138,7 @@ select:focus {
   margin-top: 11px;
 }
 .page-heading .eyebrow {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.1em;
 }
 .page-heading > .button {
@@ -1190,7 +1190,7 @@ select:focus {
 }
 .next-care .eyebrow {
   margin: 0;
-  font-size: 9px;
+  font-size: 11px;
 }
 .next-care h3 {
   font-size: 21px;
@@ -1209,7 +1209,7 @@ select:focus {
   margin: 18px 0 12px;
 }
 .session-check {
-  font-size: 10px;
+  font-size: 11px;
   color: #526c60;
   display: flex;
   gap: 7px;
@@ -1219,7 +1219,7 @@ select:focus {
 .next-care > .button {
   width: 100%;
   font-size: 11px;
-  min-height: 42px;
+  min-height: 44px;
 }
 .quick-grid {
   display: grid;
@@ -1257,7 +1257,7 @@ select:focus {
 }
 .quick-card small {
   display: block;
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted);
   margin-top: 6px;
   line-height: 1.4;
@@ -1304,8 +1304,8 @@ select:focus {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 35px;
-  height: 35px;
+  width: 44px;
+  height: 44px;
   background: #ffffff80;
   z-index: 2;
 }
@@ -1321,7 +1321,7 @@ select:focus {
   left: 0;
   right: 0;
   text-align: center;
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0.13em;
   color: #687383;
 }
@@ -1332,19 +1332,19 @@ select:focus {
   font-size: 17px;
 }
 .caregiver-details .section-head .icon-button {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
 }
 .caregiver-details > p {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted);
   margin: 4px 0 13px;
 }
 .caregiver-details .badge {
-  font-size: 8px;
+  font-size: 11px;
 }
 .caregiver-footer {
   display: flex;
@@ -1356,14 +1356,14 @@ select:focus {
   gap: 8px;
 }
 .caregiver-footer > span {
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted);
 }
 .caregiver-footer strong {
   font-size: 17px;
 }
 .caregiver-footer small {
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted);
   font-weight: 400;
 }
@@ -1385,7 +1385,7 @@ select:focus {
   margin-top: 6px;
 }
 .assistant-banner .button {
-  font-size: 10px;
+  font-size: 11px;
 }
 .mobile-only,
 .mobile-nav,
@@ -1421,7 +1421,7 @@ select:focus {
 }
 .status-row .badge {
   margin-left: auto;
-  font-size: 9px;
+  font-size: 11px;
 }
 .status-row strong {
   font-size: 12px;
@@ -1488,7 +1488,7 @@ select:focus {
   color: var(--muted);
   padding: 10px 15px;
   border-radius: 99px;
-  min-height: 38px;
+  min-height: 44px;
 }
 .segmented button.active {
   background: white;
@@ -1758,7 +1758,7 @@ input[aria-invalid="true"] {
   position: absolute;
   top: 38px;
   left: 35px;
-  font-size: 8px;
+  font-size: 11px;
 }
 .access-symbol {
   margin: 15px auto 50px;
@@ -1788,7 +1788,7 @@ input[aria-invalid="true"] {
   margin: 17px 0 30px;
 }
 .access-art > .badge {
-  font-size: 9px;
+  font-size: 11px;
   background: #ffffff80;
 }
 .access-form h1 {
@@ -1818,7 +1818,7 @@ input[aria-invalid="true"] {
 }
 .access-form .demo-notice {
   justify-content: start;
-  font-size: 9px;
+  font-size: 11px;
 }
 .onboarding-progress {
   display: flex;
@@ -1909,13 +1909,13 @@ input[aria-invalid="true"] {
   font-size: 12px;
 }
 .conversation small {
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.5;
   margin-top: 5px;
   color: var(--muted);
 }
 .conversation .badge {
-  font-size: 8px;
+  font-size: 11px;
 }
 .conversation-note {
   text-align: center;
@@ -1954,7 +1954,7 @@ input[aria-invalid="true"] {
 }
 .chat-date {
   text-align: center;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.09em;
   color: #7b8699;
   margin: 0 0 10px;
@@ -1980,7 +1980,7 @@ input[aria-invalid="true"] {
 .chat-bubble small {
   display: block;
   text-align: right;
-  font-size: 8px;
+  font-size: 11px;
   color: #6b768a;
   margin-top: 6px;
 }
@@ -2003,8 +2003,8 @@ input[aria-invalid="true"] {
   min-height: 40px;
 }
 .message-composer .button {
-  width: 40px;
-  min-height: 40px;
+  width: 44px;
+  min-height: 44px;
   padding: 0;
   flex-shrink: 0;
 }
@@ -2013,7 +2013,7 @@ input[aria-invalid="true"] {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 9px;
+  font-size: 11px;
   color: #7a8495;
   margin: 9px 10px 20px;
 }
@@ -2041,7 +2041,7 @@ input[aria-invalid="true"] {
   margin: 0 auto 20px;
 }
 .assistant-intro .badge {
-  font-size: 9px;
+  font-size: 11px;
 }
 .assistant-intro h2 {
   font-size: 29px;
@@ -2124,10 +2124,10 @@ input[aria-invalid="true"] {
   line-height: 1.7;
 }
 .safety-grid .badge {
-  font-size: 8px;
+  font-size: 11px;
 }
 .safety-grid .text-link {
-  font-size: 10px;
+  font-size: 11px;
   margin-top: 14px;
 }
 .safety-grid .icon-tile {
@@ -2231,7 +2231,7 @@ hr {
   margin-top: 12px;
 }
 .swatches small {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted);
 }
 .component-row .button {
@@ -2445,7 +2445,7 @@ hr {
     align-items: start;
   }
   .page-heading > .button {
-    font-size: 10px;
+    font-size: 11px;
     max-width: 145px;
   }
   .dashboard-feature {
@@ -2648,10 +2648,10 @@ hr {
     height: 75px;
   }
   .glass-emblem > span {
-    font-size: 8px;
+    font-size: 11px;
   }
   .float-tag {
-    font-size: 9px;
+    font-size: 11px;
     padding: 7px 10px 7px 7px;
     gap: 6px;
   }
@@ -2669,7 +2669,7 @@ hr {
   }
   .art-caption {
     bottom: 10px;
-    font-size: 7px;
+    font-size: 11px;
   }
   .hero-bottom {
     display: block;
@@ -2695,13 +2695,13 @@ hr {
     gap: 12px;
   }
   .cta-capsule strong {
-    font-size: 10px;
+    font-size: 11px;
   }
   .cta-capsule small {
-    font-size: 8px;
+    font-size: 11px;
   }
   .cta-capsule .button {
-    font-size: 10px;
+    font-size: 11px;
     padding: 11px 13px;
   }
   .hero-actions > .text-link {
@@ -2710,7 +2710,7 @@ hr {
   }
   .hero-footnote {
     justify-content: space-between;
-    font-size: 9px;
+    font-size: 11px;
     gap: 12px;
     flex-wrap: wrap;
   }
@@ -2769,12 +2769,12 @@ hr {
     font-size: 12px;
   }
   .mini-profile small {
-    font-size: 10px;
+    font-size: 11px;
   }
   .mini-caption {
     text-align: left;
     margin-left: 15px;
-    font-size: 9px;
+    font-size: 11px;
   }
   .privacy-stack {
     max-width: 320px;
@@ -2856,19 +2856,19 @@ hr {
     gap: 7px;
   }
   .breadcrumb {
-    font-size: 10px;
+    font-size: 11px;
   }
   .breadcrumb > span {
     margin: 0 6px;
   }
   .environment-pill {
-    font-size: 8px;
+    font-size: 11px;
     padding: 4px 7px;
   }
   .topbar-right .avatar {
     width: 34px;
     height: 34px;
-    font-size: 10px;
+    font-size: 11px;
   }
   .app-main {
     padding: 26px 20px 105px;
@@ -2910,7 +2910,7 @@ hr {
     font-size: 22px;
   }
   .next-care .eyebrow {
-    font-size: 10px;
+    font-size: 11px;
   }
   .next-care > p {
     font-size: 12px;
@@ -2937,7 +2937,7 @@ hr {
     font-size: 12px;
   }
   .quick-card small {
-    font-size: 10px;
+    font-size: 11px;
   }
   .quick-card > svg {
     display: block;
@@ -2995,7 +2995,7 @@ hr {
     flex-direction: column;
     gap: 4px;
     width: 20%;
-    font-size: 8px;
+    font-size: 11px;
     min-height: 48px;
     background: transparent;
     color: #718198;
@@ -3006,7 +3006,7 @@ hr {
     border-radius: 12px;
   }
   .app-main > .demo-notice {
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.7;
   }
   .toast {
@@ -3053,7 +3053,7 @@ hr {
     font-size: 12px;
   }
   .safety-grid .badge {
-    font-size: 9px;
+    font-size: 11px;
   }
   .profile-hero {
     display: block;
@@ -3090,7 +3090,7 @@ hr {
   }
   .tabs button {
     flex: 1;
-    font-size: 10px;
+    font-size: 11px;
     padding: 10px 7px;
     white-space: normal;
   }
@@ -3149,7 +3149,7 @@ hr {
     padding: 18px;
   }
   .conversation-content header .badge {
-    font-size: 8px;
+    font-size: 11px;
   }
   .chat-messages {
     padding: 20px 18px;
@@ -3163,7 +3163,7 @@ hr {
     font-size: 12px;
   }
   .chat-disclaimer {
-    font-size: 8px;
+    font-size: 11px;
     line-height: 1.6;
   }
   .assistant-intro {
@@ -3218,12 +3218,12 @@ hr {
   .tag-trust {
     left: -4px;
     top: 13%;
-    font-size: 8px;
+    font-size: 11px;
   }
   .tag-care {
     right: -4px;
     bottom: 11%;
-    font-size: 8px;
+    font-size: 11px;
   }
   .hero-art .orbit {
     width: 235px;
@@ -3233,7 +3233,7 @@ hr {
     font-size: 35px;
   }
   .hero .eyebrow {
-    font-size: 8px;
+    font-size: 11px;
   }
   .hero-bottom {
     padding-top: 28px;
@@ -3243,7 +3243,7 @@ hr {
     padding-left: 14px;
   }
   .cta-capsule .button {
-    font-size: 9px;
+    font-size: 11px;
     padding: 10px 12px;
     gap: 5px;
   }
@@ -3271,7 +3271,7 @@ hr {
     padding: 0 10px;
   }
   .breadcrumb {
-    font-size: 9px;
+    font-size: 11px;
   }
   .environment-pill {
     display: none;
@@ -3301,10 +3301,10 @@ hr {
     font-size: 11px;
   }
   .caregiver-details .badge {
-    font-size: 9px;
+    font-size: 11px;
   }
   .caregiver-footer > span {
-    font-size: 10px;
+    font-size: 11px;
   }
   .caregiver-footer strong {
     font-size: 20px;
@@ -3324,10 +3324,10 @@ hr {
     font-size: 11px;
   }
   .safety-grid .text-link {
-    font-size: 10px;
+    font-size: 11px;
   }
   .safety-grid .badge {
-    font-size: 8px;
+    font-size: 11px;
   }
   .profile-hero {
     padding: 23px;
@@ -3344,17 +3344,17 @@ hr {
     gap: 13px;
   }
   .profile-person p {
-    font-size: 10px;
+    font-size: 11px;
   }
   .profile-rate strong {
     font-size: 23px;
   }
   .profile-rate small {
-    font-size: 10px;
+    font-size: 11px;
   }
   .profile-rate .button {
     padding: 10px 14px;
-    font-size: 10px;
+    font-size: 11px;
   }
   .child-summary .icon-tile {
     display: none;
@@ -3373,10 +3373,10 @@ hr {
     gap: 8px;
   }
   .status-row .badge {
-    font-size: 8px;
+    font-size: 11px;
   }
   .conversation-content header .person-row small {
-    font-size: 9px;
+    font-size: 11px;
   }
   .swatches {
     gap: 12px;
@@ -3494,4 +3494,357 @@ textarea::placeholder {
   border: 0;
   padding: 0;
   min-width: 0;
+}
+
+/* Approved photographic layer: existing page geometry and navigation retained. */
+.brand img {
+  display: block;
+  width: 180px;
+  height: auto;
+  border-radius: 0;
+}
+.brand-compact img {
+  width: 40px;
+}
+.sidebar .brand img {
+  width: 165px;
+}
+.glass-emblem .brand img {
+  width: 78px;
+}
+.identity-dark .brand {
+  padding: 10px 14px;
+  background: #f8f9fc;
+  border-radius: 12px;
+}
+.avatar {
+  overflow: hidden;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 34%;
+}
+.hero-photo {
+  position: absolute;
+  margin: 0;
+  padding: 7px;
+  border: 1px solid #fff;
+  background: #ffffffc9;
+  border-radius: 27px;
+  box-shadow:
+    0 20px 48px #445d8b20,
+    inset 0 1px 0 #fff;
+  z-index: -1;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 21px;
+  display: block;
+}
+.hero-photo figcaption {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #4c596c;
+  text-align: center;
+  padding: 7px 0 0;
+}
+.hero-photo-care {
+  width: 340px;
+  height: 257px;
+  left: 5%;
+  top: 70px;
+  transform: rotate(-6deg);
+}
+.hero-photo-care img {
+  object-position: 35% 45%;
+}
+.hero-photo-child {
+  width: 185px;
+  height: 240px;
+  right: 12%;
+  top: 56px;
+  transform: rotate(7deg);
+}
+.hero-photo-child img {
+  object-position: center 35%;
+}
+.hero-art .orbit {
+  opacity: 0.5;
+}
+.tag-trust {
+  top: 8%;
+  left: 10%;
+}
+.tag-care {
+  right: 6%;
+  bottom: 12%;
+}
+.glass-emblem {
+  margin-left: 60px;
+}
+.feature-photo {
+  margin: 18px 0 0;
+  height: 145px;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px #3c557815;
+}
+.feature-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+.feature-photo figcaption {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  padding: 5px 9px;
+  border-radius: 9px;
+  font-size: 11px;
+  color: #43516a;
+  background: #fffffff0;
+  width: fit-content;
+}
+.caregiver-cover {
+  height: 210px;
+}
+.caregiver-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  transition: transform 350ms ease;
+}
+.cover-caption {
+  background: #fffffff0;
+  color: #43516a;
+  margin: 0 10px;
+  padding: 5px 7px;
+  border-radius: 9px;
+  letter-spacing: 0.015em;
+  font-size: 11px;
+}
+.caregiver-card {
+  transition:
+    box-shadow 200ms,
+    transform 200ms;
+}
+.favorite {
+  background: #fffffff0;
+  box-shadow: 0 3px 12px #20263312;
+}
+.access-photo {
+  margin: 20px -15px 30px;
+  width: calc(100% + 30px);
+  background: #ffffffa8;
+  padding: 7px;
+  border-radius: 24px;
+  box-shadow: 0 16px 35px #48577817;
+  transform: rotate(-3deg);
+}
+.access-photo img {
+  display: block;
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  object-position: 35% 45%;
+  border-radius: 18px;
+}
+.access-photo figcaption {
+  font-size: 11px;
+  color: #4c596c;
+  padding: 9px 5px 4px;
+  line-height: 1.5;
+}
+.access-art > .eyebrow {
+  z-index: 1;
+}
+.date-label {
+  text-transform: none;
+}
+.date-label::first-letter {
+  text-transform: uppercase;
+}
+.caregiver-photo[src*="sofia"],
+.avatar img[src*="sofia"] {
+  object-position: center 46%;
+}
+.page-heading h1,
+.profile-person h1,
+.person-row strong {
+  overflow-wrap: anywhere;
+}
+.next-care > .button,
+.message-composer .button {
+  min-height: 44px;
+}
+.message-composer .button {
+  width: 44px;
+}
+.card,
+.quick-card,
+.next-care {
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 12px 36px #334a6a0a,
+    0 2px 6px #334a6a04;
+}
+.app-topbar {
+  box-shadow: inset 0 -1px 0 #fff9;
+}
+.button {
+  box-shadow:
+    inset 0 1px 0 #ffffff26,
+    0 3px 8px #2364c50e;
+}
+.nav-item.selected {
+  box-shadow:
+    inset 0 1px 0 #fff9,
+    0 2px 6px #38578908;
+}
+@media (hover: hover) and (pointer: fine) {
+  .caregiver-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 36px #334a6a13;
+  }
+  .caregiver-card:hover .caregiver-photo {
+    transform: scale(1.035);
+  }
+  .button:hover {
+    transform: translateY(-1px);
+  }
+}
+@media (max-width: 950px) {
+  .sidebar .brand img {
+    width: 150px;
+  }
+  .hero-photo-care {
+    width: 280px;
+    left: 0;
+  }
+  .hero-photo-child {
+    width: 160px;
+    right: 2%;
+  }
+  .public-header {
+    gap: 15px;
+  }
+  .public-header .brand img {
+    width: 155px;
+  }
+  .caregiver-cover {
+    height: 185px;
+  }
+}
+@media (max-width: 760px) {
+  .hero-art {
+    height: 355px;
+  }
+  .hero-photo-care {
+    width: 205px;
+    height: 180px;
+    top: 85px;
+    left: 1%;
+    border-radius: 20px;
+  }
+  .hero-photo-care img {
+    border-radius: 15px;
+  }
+  .hero-photo-care figcaption {
+    font-size: 11px;
+    padding-top: 4px;
+  }
+  .hero-photo-child {
+    width: 130px;
+    height: 178px;
+    top: 47px;
+    right: 1%;
+    border-radius: 20px;
+  }
+  .hero-photo-child img {
+    border-radius: 15px;
+  }
+  .glass-emblem {
+    width: 107px;
+    height: 143px;
+    margin: 80px 0 0 85px;
+    border-radius: 28px;
+    gap: 5px;
+  }
+  .glass-emblem .brand img {
+    width: 43px;
+  }
+  .glass-emblem > span {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  .tag-trust {
+    top: 10px;
+    left: 0;
+  }
+  .tag-care {
+    right: 0;
+    bottom: 26px;
+  }
+  .art-caption {
+    bottom: 0;
+    letter-spacing: 0.08em;
+  }
+  .visual-trust {
+    position: static;
+    transform: none;
+    margin: 20px auto 0;
+  }
+  .highlight-card:first-child p {
+    max-width: 100%;
+  }
+  .highlight-card:first-child {
+    padding-bottom: 25px;
+  }
+  .hero-photo-care img {
+    height: 100%;
+  }
+  .public-header .brand img {
+    width: 145px;
+  }
+  .public-header > .button {
+    min-height: 44px;
+  }
+  .sidebar .brand img {
+    width: 170px;
+  }
+  .caregiver-cover {
+    height: 215px;
+  }
+  .demo-notice {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .public-footer .brand img {
+    width: 180px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .caregiver-card:hover,
+  .caregiver-card:hover .caregiver-photo,
+  .button:hover {
+    transform: none;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .sidebar,
+  .mobile-nav,
+  .card,
+  .float-tag {
+    background-color: #f8f9fc;
+  }
 }
